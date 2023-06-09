@@ -3,6 +3,7 @@
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <title>Čestitka za vjenčanje</title>
@@ -12,6 +13,7 @@
             font-family: 'MyCustomFont';
             src: url('GreatVibes-Regular.ttf') format('truetype');
         }
+        
         body {
             display: flex;
             flex-direction: row;
@@ -21,15 +23,21 @@
             background-image: url("—Pngtree—aesthetic green gold marble wallpaper_1412960.png");
             margin: 0;
             font-family: 'MyCustomFont', sans-serif;
-
         }
+        
         .wrapper {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
         }
+        
         .weddingCard {
             position: relative;
             width: 700px;
@@ -41,6 +49,7 @@
             margin: 20px;
             border-radius: 20px;
         }
+        
         .cardFront {
             position: relative;
             background-image: url('oni.jpg');
@@ -53,8 +62,8 @@
             box-shadow: inset 100px 20px 100px rgba(53, 7, 7, 0.815), 30px 0 50px rgba(0, 0, 0, 0.774);
             transition: .6s;
             border-radius: 20px;
-
         }
+        
         .congratulations {
             font-family: 'MyCustomFont', sans-serif;
             text-align: center;
@@ -64,6 +73,7 @@
             padding: 10px;
             transition: 7s;
         }
+        
         .names {
             position: absolute;
             top: 50%;
@@ -74,6 +84,7 @@
             font-family: 'MyCustomFont', sans-serif;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
+        
         .names img {
             width: 400px;
             height: 500px;
@@ -81,14 +92,17 @@
             border-radius: 40px;
             border: 6px solid #083d0a;
         }
+        
         .nameWrap {
             background-color: #3b3b3b98;
             border-radius: 50%;
         }
+        
         .names h4 {
             font-size: 35px;
             margin: 0;
         }
+        
         .cardInside {
             position: absolute;
             background-color: #f8f1f1;
@@ -100,33 +114,43 @@
             box-shadow: inset 100px 20px 100px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
         }
+        
         .cardInside .back{
             font-size: 40px;
             font-weight: 100;
             color: #000000;
             text-align: center;
         }
+        
         .poem {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-gap: 20px;
-            font-size: 15px;
+            font-size: 17px;
             padding-left: 10px;
             padding-right:10px;
             font-family: 'Playfair', serif;
             color: #000000;
         }
+        
+        .poem h2{
+            font-size: 20px;
+            font-weight: 700;
+            color: #000000;
+        }
+        
         .poem h2,
         .poem p {
             flex: 1 1 100%;
         }
+        
         .name {
             position: absolute;
             left: 150px;
             top: 200px;
             color: #000000;
         }
-
+        
         footer p{
             text-align: center;
             font-weight: 500;
@@ -134,17 +158,20 @@
             padding: 20px;
             margin-top: 550px;
         }
+        
         .weddingCard:hover {
             transform: perspective(2500px) rotate(5deg);
             box-shadow: inset 100px 20px 100px rgba(0, 0, 0, .2), 0 10px 100px rgba(0, 0, 0, 0.5);
         }
+        
         .weddingCard:hover .cardFront {
             transform: rotateY(-160deg);
         }
+        
         .weddingCard:hover .congratulations {
             visibility: hidden;
         }
-
+        
         @keyframes fade {
             0% {
                 opacity: 0;
@@ -163,6 +190,7 @@
         #slideshow-img {
             animation: fade 8s infinite;
         }
+        
         .left-side,
         .right-side {
             position: absolute;
@@ -178,6 +206,56 @@
         .right-side {
             right: 0;
         }
+        
+        /* Media Query za responzivnost na manjim ekranima */
+        
+        @media screen and (max-width: 768px) {
+            .weddingCard {
+                width: 90%;
+                height: auto;
+                max-height: 600px;
+            }
+        
+            .names {
+                font-size: 18px;
+            }
+        
+            .names img {
+                width: 80%;
+                max-width: 300px;
+                height: auto;
+            }
+        
+            .name {
+                left: 50%;
+                top: 60%;
+                transform: translateX(-50%);
+            }
+        
+            footer p {
+                margin-top: 20px;
+            }
+        
+            .left-side,
+            .right-side {
+              position: relative;
+              top: auto;
+              transform: none;
+              width: 100%;
+              text-align: center;
+              float: none;
+            }
+          
+            .left-side {
+              order: 1;
+            }
+          
+            .right-side {
+              order: 2;
+            }
+        }
+        
+        
         
     </style>
     <script>
@@ -216,12 +294,53 @@
             var weddingCard = document.querySelector('.weddingCard');
             var leftSide = document.querySelector('.left-side');
             var rightSide = document.querySelector('.right-side');
+            var screenWidth = window.innerWidth;
+            console.log(screenWidth);
             
-            weddingCard.addEventListener('mouseover', function() {
-                leftSide.style.transform = 'translateX(600%)';
-                rightSide.style.transform = 'translateX(-100%)';
-            });
-        });
+            function handleMouseEnter() {
+              if(screenWidth>1654)
+              {leftSide.style.transform = 'translateX(600%)';
+              rightSide.style.transform = 'translateX(0%)';}
+              else if(screenWidth >1400 && screenWidth <= 1654){
+                leftSide.style.transform = 'translateX(480%)';
+              rightSide.style.transform = 'translateX(0%)';
+              }
+              else if(screenWidth >1200 && screenWidth <= 1400){
+                leftSide.style.transform = 'translateX(420%)';
+              rightSide.style.transform = 'translateX(0%)';
+              }
+              else if(screenWidth >1080 && screenWidth <= 1200){
+                leftSide.style.transform = 'translateX(350%)';
+              rightSide.style.transform = 'translateX(0%)';
+              }
+              else{
+                leftSide.style.transform = 'none';
+              rightSide.style.transform = 'none'
+              }
+            }
+            
+            function handleMouseLeave() {
+              leftSide.style.transform = 'none';
+              rightSide.style.transform = 'none';
+            }
+            
+            function handleTouchStart() {
+              handleMouseEnter();
+            }
+            
+            function handleTouchEnd() {
+              handleMouseLeave();
+            }
+            
+            if (window.matchMedia('(hover: hover)').matches) {
+              weddingCard.addEventListener('mouseenter', handleMouseEnter);
+              weddingCard.addEventListener('mouseleave', handleMouseLeave);
+            } else {
+              weddingCard.addEventListener('touchstart', handleTouchStart);
+              weddingCard.addEventListener('touchend', handleTouchEnd);
+            }
+          });
+          
         
         
         
